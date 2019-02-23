@@ -4,7 +4,7 @@ body{
 
 header{
 	background: SkyBlue ; 
-	color: Black;
+	color: #767676;
 	padding: 15px 15px 15px 15px;
 }
 
@@ -21,7 +21,7 @@ nav ul{
 }
 
 nav ul li {
-	background: black;
+	background: #767676;
 	color: white;
 	display: inline-block;
 	padding: 5px 10px 5px 10px;
@@ -35,22 +35,12 @@ nav ul li a {
 	
 }
 
-.rov{
-	clear: both;
-	
-}
 
-.col{
-		background: DeepSkyBlue;
-		border-radius: 5px;
-		margin: .5%;
-		width: 31%;
-		float: left;
-		padding: 5px;
-		
-	
+.activate{
+	background: #696565;
+	padding: 5px 10px 10px 10px;
 }
 
 footer{
-	clear: both;
+	position:absolute; left:20px; top:700px;
 }
