@@ -35,6 +35,20 @@ nav ul li a {
 	
 }
 
+.testBox{
+	margin: 100px;
+	padding: 10px;
+	display: inline-block;
+	background: red;
+}
+
+.testBox_active{
+	margin: 100px;
+	padding: 10px;
+	display: inline-block;
+	background: green;
+}
+
 
 .activate{
 	background: #696565;
@@ -43,4 +57,12 @@ nav ul li a {
 
 footer{
 	position:absolute; left:20px; top:700px;
+}
+
+
+canvas{
+	
+	margin: 30px;
+	
+	
 }
