@@ -62,7 +62,16 @@ footer{
 
 canvas{
 	
-	margin: 30px;
+	margin: 0px;
+	
+
+}
+
+.points{
+	
+	display: inline-block;
+	
+	margin: 0px;
 	
 	
 }

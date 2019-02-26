@@ -1,5 +1,5 @@
 
-
+var disp_points = document.getElementById("points");
 var canvas = document.getElementById("canvas");
 
 canvas.width = canvas.scrollWidth;
@@ -7,6 +7,9 @@ canvas.height = canvas.scrollHeight;
 
 var ctx = canvas.getContext("2d");
 var count = 0;
+var frame = 0;
+
+var col_lock = false;
 
 var x = 0;
 var y = 0;
@@ -75,7 +78,7 @@ function draw_snake(x,y,t){
 function draw_apple(x,y){
 	
 	ctx.beginPath();
-	ctx.arc(x+10, y+10, 10, 0, 2*Math.PI, false);
+	ctx.arc(x+10, y+10, 6, 0, 2*Math.PI, false);
 	ctx.fillStyle = "red";
 	ctx.fill();
 	ctx.lineWidth = 2;
@@ -84,13 +87,17 @@ function draw_apple(x,y){
 }
 
 function test_tail(a){
+	col_lock = false;
+	
 	
   for(var i = 0; i<snake.tail.length; ++i){
     if (a[0] === snake.tail[i][0] && a[1] === snake.tail[i][1]){
-    	return true;
+    	col_lock = true;
+		return true;
     }
   }
-return false;
+col_lock = true;
+  return false;
 }
 
 
@@ -109,18 +116,28 @@ function reset_game(){
 
 function loop() {
 	
+	disp_points.innerHTML = "Points: " + snake.points;
+	
 
 	
 	
 	requestAnimationFrame(loop);
+	
 	
 	if (++count < 10) {
 		return;
 	}
 	count = 0;
 	
+	
 	ctx.clearRect(0,0,canvas.width,canvas.height);
 	
+	if(snake.velx == 0 && snake.vely ==0){
+		ctx.font = "30px Consolas";
+		ctx.fillStyle = "grey";
+		ctx.fillText("Press arrow keys to start the game", 110, 280);
+		
+	}
 	//draw_board();
 	draw_apple(apple.x, apple.y);
 	draw_snake(snake.x, snake.y, 1);
@@ -151,14 +168,16 @@ function loop() {
 		apple.y = getRandomInt(0,30) * cell;
 		snake.tail.push([snake.x, snake.y]);
 		++snake.points; 
+		
 	}
-
+	
+	
 	for (var i=0; i < snake.tail.length; ++i){
 		var a = snake.tail[i][0]; 
 		var b = snake.tail[i][1];
 		draw_snake(a,b, 0);
 	}
-	
+
 	if(snake.velx !== 0 || snake.vely !== 0){
 		
 
@@ -172,7 +191,7 @@ function loop() {
 	
 	}
 	
-	
+	++frame;
 
 	
 	
@@ -183,7 +202,12 @@ function loop() {
 
 document.addEventListener("keydown", move);
 
+
+
 function move(e){
+	
+	
+	if(col_lock && frame !== frame2){
 	
 	//left
 	if(e.which === 37 && snake.velx !== cell){
@@ -208,7 +232,11 @@ function move(e){
 		snake.velx = 0;
 		snake.vely = cell;
 	}
+		}
 	
+	var frame2 = frame; 	
+
 }
+
 
 requestAnimationFrame(loop);
